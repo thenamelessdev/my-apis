@@ -34,6 +34,12 @@ export default {
         )
       }
     }
+    if (url.pathname == "/random") {
+      return new Response(
+        JSON.stringify({ number: String(Math.random()) }),
+        { headers: {"Content-Type": "application/json"} }
+      )
+    }
 
     // Default: Not found
     return new Response("Not found", { status: 404 });
