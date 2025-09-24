@@ -41,6 +41,23 @@ export default {
       )
     }
 
+    if (url.pathname == "/dog") {
+      try {
+        const dog = await fetch("https://dog.ceo/api/breeds/image/random");
+        const dogjson = await dog.json()
+        return new Response(
+          JSON.stringify({ image: dogjson.message }),
+          { headers: { "Content-Type": "application/json" } }
+        )
+      }
+      catch {
+        return new Response(
+          JSON.stringify({ error: "Api didn't respond" }),
+          { headers: { "Content-Type": "application/json" } }
+        )
+      }
+    }
+
     // Default: Not found
     return new Response("Not found", { status: 404 });
   },
